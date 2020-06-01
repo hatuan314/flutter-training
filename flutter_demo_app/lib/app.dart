@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'splash_screen.dart';
+import 'package:flutterdemoapp/ui/first_screen.dart';
+import 'package:flutterdemoapp/ui/second_screen.dart';
+import 'package:flutterdemoapp/ui/third_screen.dart';
+import 'ui/splash_screen.dart';
 
 /// Màu chủ đạo
 /// font chữ
@@ -13,12 +16,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SplashScreen(),
+      home: ThirdScreen(),
     );
   }
-
 }
