@@ -4,6 +4,7 @@ class FirstScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+    print('1');
     return Scaffold(
       backgroundColor: Colors.yellow,
       appBar: AppBar(

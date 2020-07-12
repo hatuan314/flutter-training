@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutterdemoapp/ui/first_screen.dart';
-import 'package:flutterdemoapp/ui/login_screen.dart';
-import 'package:flutterdemoapp/ui/second_screen.dart';
-import 'package:flutterdemoapp/ui/third_screen.dart';
-import 'ui/splash_screen.dart';
+import 'package:flutterdemoapp/ui/widget/first_screen.dart';
+import 'package:flutterdemoapp/ui/widget/login_provider.dart';
+import 'package:flutterdemoapp/ui/widget/login_screen.dart';
+import 'package:flutterdemoapp/ui/widget/second_screen.dart';
+import 'package:flutterdemoapp/ui/widget/third_screen.dart';
+import 'ui/widget/splash_screen.dart';
 
 /// Màu chủ đạo
 /// font chữ
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginScreen(),
+      home: LoginProviderScreen(),
     );
   }
 }
