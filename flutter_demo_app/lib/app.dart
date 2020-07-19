@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdemoapp/homework/ex51/ui/login_screen.dart';
 
 import 'package:flutterdemoapp/ui/widget/first_screen.dart';
 import 'package:flutterdemoapp/ui/widget/login_provider.dart';
-import 'package:flutterdemoapp/ui/widget/login_screen.dart';
+//import 'package:flutterdemoapp/ui/widget/login_screen.dart';
 import 'package:flutterdemoapp/ui/widget/second_screen.dart';
 import 'package:flutterdemoapp/ui/widget/third_screen.dart';
 import 'ui/widget/splash_screen.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginProviderScreen(),
+      home: LoginScreen(),
     );
   }
 }
