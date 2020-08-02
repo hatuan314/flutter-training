@@ -26,6 +26,7 @@ dependencies:
   flutter_i18n: ^0.15.0
   font_awesome_flutter: ^8.8.1
   provider: ^4.0.4
+  flutter_screenutil: ^2.3.1
 
 dev_dependencies:
   flutter_test:
