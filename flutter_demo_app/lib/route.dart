@@ -9,7 +9,6 @@ import 'package:flutterdemoapp/ui/widget/login_screen.dart';
 
 import 'common/route_list.dart';
 
-//int currentRoot = 1;
 
 RouteFactory router() {
   return (RouteSettings settings) {
