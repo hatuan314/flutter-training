@@ -21,7 +21,7 @@ class TodoListScreen extends StatelessWidget {
         child: ListView.builder(
             itemCount: viewModel.todoList.length,
             itemBuilder: (context, int index) {
-              return _todoItem(todo: viewModel.todoList[index]);
+              return _todoItem(context, todo: viewModel.todoList[index]);
             }),
       ),
       floatingActionButton: FloatingActionButton(
@@ -33,40 +33,43 @@ class TodoListScreen extends StatelessWidget {
     );
   }
 
-  Widget _todoItem({Todo todo}) {
-    return Card(
-      color: Colors.white,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(8))),
-      elevation: 10,
-      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-      child: Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text('${todo.title}',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: ScreenUtil().setSp(36))),
-            const SizedBox(
-              height: 5,
-            ),
-            Text('${todo.date}',
-                style: TextStyle(
-                    color: Colors.grey,
-                    fontWeight: FontWeight.normal,
-                    fontSize: ScreenUtil().setSp(32))),
-            const SizedBox(
-              height: 5,
-            ),
-            Text('${todo.content}',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.normal,
-                    fontSize: ScreenUtil().setSp(32))),
-          ],
+  Widget _todoItem(BuildContext context, {Todo todo}) {
+    return GestureDetector(
+      onTap: () => Navigator.of(context).pushNamed(RouteList.todoDetail, arguments: {'todo': todo}),
+      child: Card(
+        color: Colors.white,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(8))),
+        elevation: 10,
+        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        child: Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text('${todo.title}',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: ScreenUtil().setSp(36))),
+              const SizedBox(
+                height: 5,
+              ),
+              Text('${todo.date}',
+                  style: TextStyle(
+                      color: Colors.grey,
+                      fontWeight: FontWeight.normal,
+                      fontSize: ScreenUtil().setSp(32))),
+              const SizedBox(
+                height: 5,
+              ),
+              Text('${todo.content}',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.normal,
+                      fontSize: ScreenUtil().setSp(32))),
+            ],
+          ),
         ),
       ),
     );

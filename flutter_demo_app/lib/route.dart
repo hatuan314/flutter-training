@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:flutterdemoapp/todo-app/ui/create_to_do_screen.dart';
 import 'package:flutterdemoapp/todo-app/ui/to_do_list_screen.dart';
+import 'package:flutterdemoapp/todo-app/ui/todo_detail_screen.dart';
 import 'package:flutterdemoapp/todo-app/view_model/todo_view_model.dart';
 import 'package:flutterdemoapp/ui/widget/base_widget.dart';
 import 'package:flutterdemoapp/ui/widget/login_screen.dart';
@@ -34,6 +35,9 @@ RouteFactory router() {
         break;
       case RouteList.createTodo:
         screen = CreateTodoScreen(viewModel: args['todoViewModel']);
+        break;
+        case RouteList.todoDetail:
+        screen = TodoDetailScreen(todo: args['todo']);
         break;
       case RouteList.login:
         screen = LoginScreen();

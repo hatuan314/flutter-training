@@ -1,7 +1,9 @@
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutterdemoapp/todo-app/model/todo.dart';
 import 'package:flutterdemoapp/todo-app/view_model/todo_view_model.dart';
+import 'package:intl/intl.dart';
 
 class CreateTodoScreen extends StatefulWidget {
   final TodoViewModel viewModel;
@@ -16,6 +18,7 @@ class _CreateTodoScreenState extends State<CreateTodoScreen> {
   GlobalKey<FormState> _textFormKey = GlobalKey();
   TextEditingController _titleController = TextEditingController();
   TextEditingController _contentController = TextEditingController();
+  TextEditingController _dateController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -45,27 +48,72 @@ class _CreateTodoScreenState extends State<CreateTodoScreen> {
                     fontSize: ScreenUtil().setSp(32),
                   ),
                 ),
+                validator: (value) => widget.viewModel.todoValidator(value),
               ),
               const SizedBox(
                 height: 20,
               ),
-              Container(
-                child: Row(
-                  children: <Widget>[
-                    Icon(
-                      Icons.calendar_today,
-                      size: ScreenUtil().setSp(42),
-                    ),
-                    const SizedBox(width: 30),
-                    Text(
-                      '${DateTime.now()}',
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: ScreenUtil().setSp(32),
+              InkWell(
+                onTap: () async {
+                  debugPrint('startTime: ${widget.viewModel.startTime}');
+                  widget.viewModel.startTime = await showDatePicker(
+                      context: context,
+                      firstDate: DateTime(1900),
+                      initialDate: DateTime.now(),
+                      lastDate: DateTime(2100));
+                  debugPrint('startTime: ${widget.viewModel.startTime}');
+                },
+                child: Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        'Start Time',
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: ScreenUtil().setSp(32),
+                        ),
                       ),
-                    )
-                  ],
+                      Row(
+                        children: <Widget>[
+                          Icon(
+                            Icons.calendar_today,
+                            size: ScreenUtil().setSp(42),
+                          ),
+                          const SizedBox(width: 30),
+                          Text(
+                            '${widget.viewModel.startTime}',
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: ScreenUtil().setSp(32),
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              DateTimeField(
+                controller: _dateController,
+                format: DateFormat("yyyy-MM-dd"),
+                decoration: InputDecoration(
+                  hintText: 'End Time',
+                  hintStyle: TextStyle(
+                    color: Colors.grey,
+                    fontSize: ScreenUtil().setSp(32),
+                  ),
+                ),
+                onShowPicker: (context, currentValue) async {
+                  return showDatePicker(
+                      context: context,
+                      firstDate: DateTime(1900),
+                      initialDate: currentValue ?? DateTime.now(),
+                      lastDate: DateTime(2100));
+                },
               ),
               const SizedBox(
                 height: 20,
@@ -79,6 +127,7 @@ class _CreateTodoScreenState extends State<CreateTodoScreen> {
                     fontSize: ScreenUtil().setSp(32),
                   ),
                 ),
+                validator: (value) => widget.viewModel.todoValidator(value),
               ),
             ],
           ),
@@ -88,11 +137,14 @@ class _CreateTodoScreenState extends State<CreateTodoScreen> {
   }
 
   _btnDoneOnPress() {
-    Todo todo = Todo(
-        title: _titleController.text.trim(),
-        date: DateTime.now().toString(),
-        content: _contentController.text.toString());
-    widget.viewModel.addTodo(todo);
-    Navigator.of(context).pop();
+    if (_textFormKey.currentState.validate()) {
+//      debugPrint('date: ${_dateController.text}');
+      Todo todo = Todo(
+          title: _titleController.text.trim(),
+          date: _dateController.text.trim(),
+          content: _contentController.text.toString());
+      widget.viewModel.addTodo(todo);
+      Navigator.of(context).pop();
+    }
   }
 }
